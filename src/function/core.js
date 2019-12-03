@@ -2,6 +2,7 @@ import vinput from './vinput.vue'
 import vswitch from './vswitch.vue'
 import vtitle from './vtitle.vue'
 import vbutton from './vbutton.vue'
+// import draggableItems from './draggableItems.vue'
 // vinput.install = function (Vue) {
 //     Vue.component('vshare', vinput)
 //     if (typeof window !== 'undefined' && window.Vue) {
@@ -15,10 +16,10 @@ export default {
     //     return '<div>hjhj</div>'
     // }  //'component-name'这就是后面可以使用的组件的名字，install是默认的一个方法
     name:'formBuilder',
-    props: ['title','type'],
+    props: ['rule'],
     data: () => {
         let backAndTextColor = {
-            margin:"5px"
+            margin:"10px 0"
         };
         return {
             // list:[1,2,3,4,5,6]
@@ -30,26 +31,26 @@ export default {
     methods:{
         builderTemplate(t){
             let elm;
-            console.log(t)
+            // console.log(t)
             switch(t){
                 // 组件添加
                 case "input":
-                    console.log(this.title,"2131312")
-                    elm = <vinput title={this.title}></vinput>
+                    // console.log(this.rule,"2131312")
+                    elm = <vinput info={this.rule}></vinput>
                     
                 break;
                 case "switch":
                     
-                    elm = <vswitch title={this.title}></vswitch>
+                    elm = <vswitch info={this.rule}></vswitch>
                 break;
                 case "title":
                     
-                    elm = <vtitle title={this.title}></vtitle>
+                    elm = <vtitle info={this.rule}></vtitle>
                     // elm = this.vTitle
                 break;
                 case "button":
                     
-                    elm = <vbutton title={this.title}></vbutton>
+                    elm = <vbutton info={this.rule}></vbutton>
                 break;
                 case "slider":
                     
@@ -87,8 +88,12 @@ export default {
                     
                     elm = <span>{t} </span>
                 break;
+                // case "layout":
+                    
+                //     elm = <draggableItems info={this.rule}> </draggableItems>
+                // break;
             }
-            console.log(elm)
+            // console.log(elm)
             return elm;
             
         }
@@ -97,7 +102,10 @@ export default {
         return (
             <div style={this.component}>
                 {
-                    this.builderTemplate(this.type)
+                    this.builderTemplate(this.rule.type)
+                }
+                {
+                    // console.log(this.rule.title)
                 }
             </div>
             

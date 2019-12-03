@@ -7,6 +7,10 @@ import formCreate from '@form-create/element-ui'
 import VueRouter from 'vue-router'
 
 import routes from "./routers.js"
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+ 
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.use(formCreate);
 Vue.use(ElementUI);

@@ -1,15 +1,17 @@
 <template >
   <div style="display:flex;align-items: center;">
     <div>
-      <span >
-      {{title}}
-    </span>
+      <span class="small">
+        {{info.title}}
+      </span>
     </div>
     
     <div  style="flex-grow: 1;">
       <el-input
         placeholder="请填写信息"
-        v-model="inputValue">
+        v-model="inputValue"
+        size="small"
+        >
       </el-input>
     </div>
       
@@ -20,11 +22,12 @@
 export default {
   name : 'vinput',
   props: {
-    title: String
+    info: Object
   },
   data(){
     return {
-      inputValue: '123'
+      inputValue: '',
+      type: 'show-password'
     }
       
   }
@@ -32,5 +35,7 @@ export default {
 </script>
 
 <style>
-
+.small{
+  font-size:14px;
+}
 </style>

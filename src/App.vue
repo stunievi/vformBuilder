@@ -31,7 +31,7 @@
               </template>
               <el-menu-item-group>
                 <template slot="title">分组一</template>
-                <el-menu-item index="/newApplication">新建应用</el-menu-item>
+                <el-menu-item index="/designApp">设计应用</el-menu-item>
                 <el-menu-item index="/appList">应用列表</el-menu-item>
               </el-menu-item-group>
               <el-menu-item-group title="分组2">

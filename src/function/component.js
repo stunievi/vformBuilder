@@ -18,7 +18,7 @@ let componentJson =  [
     }, {
         type: "input",
         name: "输入框",
-        title: "商品名称",
+        title: "名称",
         field: "goods_name",
         value: "iphone 7",
         col: {
@@ -65,6 +65,23 @@ let componentJson =  [
         name: "按钮",
         title: "按钮",
         type: "button"
+    },{
+        
+        name:"分栏",
+        title:"",
+        type:"layout",
+        items: [
+            {
+                name: "级联选择器",
+                title: "级联选择器",
+                type: "cascader"
+            },
+            {
+                name: "级联选择器",
+                title: "级联选择器",
+                type: "cascader"
+            }
+        ]
     }
         
 ]

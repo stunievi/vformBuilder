@@ -7,9 +7,16 @@ const routes = [
         component: index
         
     },
-    {
-        path:'/newApplication',
-        component: ()=> import("./view/application/newApplication.vue")
+    {   
+        path: '/designApp',
+        component:  ()=> import("./view/application/designApp.vue"),
+        children:[
+            {
+                path:'/newApplication',
+                component: ()=> import("./view/application/newApplication.vue")
+            }
+            
+        ]
     },
     {
         path:'/appList',

@@ -1,7 +1,7 @@
 <template>
   <div>
       <h3>
-          {{title}}
+          {{info.title}}
       </h3>
   </div>
 </template>
@@ -10,7 +10,7 @@
 export default {
   name : 'vtitle',
   props: {
-    title: String
+    info: Object
   },
   data(){
     return {
