@@ -19,7 +19,7 @@
             </div>
         </div>
         <!-- 类型 -->
-          <div v-if="info.type != null" style="display:flex;align-items: center;margin:10px 0">
+          <!-- <div v-if="info.type != null" style="display:flex;align-items: center;margin:10px 0">
             <div >
                 <span >
                 类型:
@@ -33,7 +33,7 @@
                     >
                 </el-input>
             </div>
-        </div>
+        </div> -->
         
       </div>
     
@@ -59,8 +59,13 @@ export default {
   methods:{
       sure:function(){
           console.log(this.info)
-        //   this.info.title = this.inputValue
+          this.info.title = this.inputValue
       }
+  },
+  watch: {
+    info: function () {
+         this.inputValue = this.info.title
+    }
   }
 }
 </script>

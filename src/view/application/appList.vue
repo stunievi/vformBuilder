@@ -1,12 +1,24 @@
 <template>
   <div style="height: 100%;">
     <el-container style="height: 100%;">
-      
-
-      
-        <!-- <form-create  v-model="fApi" :rule="rule"></form-create> -->
-
+      <el-menu
+      default-active="0"
+      class="el-menu-vertical-demo">
+      <el-menu-item v-for="(value,key) in appList" :key="key"  index="0"  @click="appListOpen(value)">
+        <i class="el-icon-menu"></i>
+        <span slot="title">{{value.name}}</span>
+      </el-menu-item>
+    </el-menu>
       <el-main>
+        <div>
+          <div  v-for="(value,key) in appForm" :key="key">
+            <span>
+              {{value.name}}
+            </span>
+          </div>
+          
+        </div>
+        
       </el-main>
       
     </el-container>
@@ -18,35 +30,54 @@ export default {
 
   data() {
     return {
-      dialogVisible:false
+      dialogVisible:false,
+      appList:[],
+      appForm:[]
     };
+  },
+  mounted:function(){
+    // 获取应用列表及表单
+    let loadingInstance1 = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+     });
+    this.axios.post(this.global.url + "/app/appList",{
+          // id:this.$route.query.id
+      }).then((response) => {
+          if(response.data.state == true){
+              this.appList = response.data.data
+              console.log(this.appList)
+              // 获取第一个的表单
+                this.getAppFormList()
+                loadingInstance1.close()
+          }else{
+            this.$message("获取表单信息失败")
+          }
+          
+      })  
   },
   methods: {
     
-    clone: function(el) {
-      return {
-        name: el.name + " cloned"
-      };
-    },
-    log: function(evt) {
-      window.console.log(evt);
-      window.console.log(this.list2);
-    },
-    editItem:function(item){
+    appListOpen:function(item){
       console.log(item)
-      item.title="中华人民共和国"
+      this.getAppFormList()
     },
-    deleteItem: function(key){
-      // 传下标
-      // this.dialogVisible = true
-      let self = this;
-      this.$confirm('确认删除?').then(function(){
-        // console.log(result)
-        self.list2.splice(key,1);
-      })
-      
-      console.log(this.list2)
-
+    getAppFormList:function(){
+      this.axios.post(this.global.url + "/app/getAppForm",{
+            id:this.appList[0].id
+        }).then((response) => {
+            if(response.data.state == true){
+                this.appForm = response.data.data
+                console.log(this.appForm)
+                // 获取第一个的表单
+                
+            }else{
+              this.$message("获取表单信息失败")
+            }
+            
+        })
     }
   }
 };

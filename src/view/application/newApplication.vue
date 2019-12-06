@@ -28,7 +28,7 @@
         <el-header
           style="text-align: right; font-size: 12px;border-bottom:1px solid rgb(240, 240, 240);"
         >
-          <el-button @click="log()">保存</el-button>
+          <el-button @click="save()">保存</el-button>
         </el-header>
         <el-main>
           <draggable class="list-group templates" :list="list2" group="element" @change="log">
@@ -113,12 +113,24 @@ export default {
           name: "输入框",
           type: "input",
           field: "goods_name",
-          title: "商品名称:",
+          title: "名称:",
           value: "mi"
         },
         { name: "按钮", title: "提交", type: "button" }
       ]
     };
+  },
+  mounted:function(){
+    this.axios.post(this.global.url + "/app/getAppFormInfo",{
+          id:this.$route.query.id
+      }).then((response) => {
+          if(response.data.state == true){
+              this.list2 = response.data.data.data
+          }else{
+            this.$message("获取表单信息失败")
+          }
+          
+      })
   },
   methods: {
     add: function() {
@@ -131,6 +143,7 @@ export default {
       console.log(el);
       // let newData = JSON.parse(JSON.stringify(el));
       let { ...newData } = el;
+      newData.field = this.randomCoding()
       return newData;
     },
     log: function() {
@@ -139,14 +152,16 @@ export default {
     },
     editItem: function(item) {
       console.log(this.list2[item]);
-      this.drawer = true;
+      
       this.drawerItem = this.list2[item];
+      this.drawer = true;
       // item.title="标题2"
       // this.list2[item].title = "sda"
     },
     deleteItem: function(key) {
       // 传下标
       // this.dialogVisible = true
+      // console.log();
       let self = this;
       this.$confirm("确认删除?").then(function() {
         // console.log(result)
@@ -154,6 +169,34 @@ export default {
       });
 
       console.log(this.list2);
+    },
+    save:function(){
+      this.axios.post(this.global.url + "/app/insertFormInfo",{
+            id:this.$route.query.id,
+            formInfo:JSON.stringify(this.list2)
+        }).then((response) => {
+            // dom根据formList长度判断是否为空
+            if(response.data.state != true){
+                this.$message("保存表单信息失败")
+            }else{
+              this.$message({
+                message:"保存成功",
+                type: 'success'
+                })
+            }
+            // console.log(this.formList)
+            
+        })
+    },
+    randomCoding:function (){
+      //创建26个字母数组
+      var arr = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','_','1','2','3','4','5','6','7','8','9'];
+      var idvalue ='';
+      let n = 8;//这个值可以改变的，对应的生成多少个字母，根据自己需求所改
+      for(var i=0;i<n;i++){
+          idvalue+=arr[Math.floor(Math.random()*36)];
+      }
+      return idvalue;
     }
   }
 };

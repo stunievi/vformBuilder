@@ -4,7 +4,7 @@
     <!-- <form-create v-model="fApi" :rule="rule" :option="option"></form-create> -->
     <el-container style=" border: 1px solid #eee;height:100%">
       <el-scrollbar>
-        <!-- <el-aside style="max-width:200px;height:100%;background-color: rgb(238, 241, 246)"> -->
+        <div style="height:100%;max-width:201px;overflow:auto">
           <el-menu  :router="true"  class="el-menu-vertical-demo" default-active="1-4-1" :default-openeds="['1', '3']" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
             <el-submenu index="1">
               <template slot="title">
@@ -30,17 +30,12 @@
                 <span slot="title">应用中心</span>
               </template>
               <el-menu-item-group>
-                <template slot="title">分组一</template>
+                <!-- <template slot="title">分组一</template> -->
                 <el-menu-item index="/designApp">设计应用</el-menu-item>
                 <el-menu-item index="/appList">应用列表</el-menu-item>
+                <el-menu-item index="/appList">我的应用</el-menu-item>
+                <el-menu-item index="/appList">回收站</el-menu-item>
               </el-menu-item-group>
-              <el-menu-item-group title="分组2">
-                <el-menu-item index="2-3">选项3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="2-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-              </el-submenu>
             </el-submenu>
             <el-submenu index="3">
               <template slot="title">
@@ -61,9 +56,9 @@
               </el-submenu>
             </el-submenu>
           </el-menu>
-        <!-- </el-aside> -->
+        </div>
       </el-scrollbar>
-      <el-container>
+      <el-container style="width:80%">
         <el-header style="text-align: left; font-size: 12px;border-bottom:1px solid rgb(240, 240, 240);">
           <!-- <el-radio-group v-model="isCollapse" style=""> -->
           <el-button @click="isCollapse = !isCollapse">展开</el-button>

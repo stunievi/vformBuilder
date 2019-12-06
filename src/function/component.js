@@ -18,7 +18,7 @@ let componentJson =  [
     }, {
         type: "input",
         name: "输入框",
-        title: "名称",
+        title: "输入框",
         field: "goods_name",
         value: "iphone 7",
         col: {
