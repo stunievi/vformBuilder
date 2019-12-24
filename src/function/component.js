@@ -19,8 +19,8 @@ let componentJson =  [
         type: "input",
         name: "输入框",
         title: "输入框",
-        field: "goods_name",
-        value: "iphone 7",
+        field: "",
+        value: "",
         col: {
             span: 12,
             labelWidth: 150
@@ -36,7 +36,23 @@ let componentJson =  [
     }, {
         name: "选择框",
         title: "选择框",
-        type: "select"
+        type: "select",
+        options: [{
+            value: '选项1',
+            label: '黄金糕'
+          }, {
+            value: '选项2',
+            label: '双皮奶'
+          }, {
+            value: '选项3',
+            label: '蚵仔煎'
+          }, {
+            value: '选项4',
+            label: '龙须面'
+          }, {
+            value: '选项5',
+            label: '北京烤鸭'
+          }],
     }, {
         name: "单选框",
         title: "单选框",
@@ -72,16 +88,24 @@ let componentJson =  [
         type:"layout",
         items: [
             {
-                name: "级联选择器",
-                title: "级联选择器",
-                type: "cascader"
+                type: "input",
+                name: "输入框",
+                title: "输入框",
+                value: "",
             },
             {
-                name: "级联选择器",
-                title: "级联选择器",
-                type: "cascader"
+                type: "input",
+                name: "输入框",
+                title: "输入框",
+                value: "",
             }
         ]
+    },{
+        
+        name:"两格栅栏",
+        title:"栅栏",
+        type:"col"
+        
     }
         
 ]

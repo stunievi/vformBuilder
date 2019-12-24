@@ -20,8 +20,28 @@ const routes = [
         component: ()=> import("./view/application/newApplication.vue")
     },
     {
+        path:'/designApp/design',
+        component: ()=> import("./view/application/design.vue")
+    },
+    {
+        path:'/designApp/designFormData',
+        component: ()=> import("./view/application/designFormData.vue")
+    },
+    {
+        path:'/designApp/newApplication/link',
+        component: ()=> import("./view/application/link.vue")
+    },
+    {
         path:'/appList',
         component: ()=> import("./view/application/appList.vue")
+    },
+    {
+        path:'/appView',
+        component: ()=> import("./view/application/appView.vue")
+    },
+    {
+        path:'/appView/newData',
+        component: ()=> import("./view/application/newData.vue")
     },
 ]
 export default routes

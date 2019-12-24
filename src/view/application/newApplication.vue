@@ -28,6 +28,7 @@
         <el-header
           style="text-align: right; font-size: 12px;border-bottom:1px solid rgb(240, 240, 240);"
         >
+          <el-button @click="link()">关联关系</el-button>
           <el-button @click="save()">保存</el-button>
         </el-header>
         <el-main>
@@ -46,12 +47,13 @@
                 <!-- 布局 -->
                 
                 <draggable
+                style="height:60px;"
                   class="list-group templates"
                   :list="element.items"
                   group="element"
                   @change="log"
                 >
-                  <el-row :gutter="20">
+                  <el-row :gutter="20" style="justify-content: center;display: flex;align-items: center;">
                     <el-col :span="12" v-for="(elementItems,items) in element.items"
                           :key="items">
                       <div class="grid-content bg-purple">
@@ -59,11 +61,11 @@
                           class="list-group-item-col"
                           
                         >
-                        <span>{{elementItems.title}}</span>
-                          <formBuilder :rule="element"/>
+                        <!-- <span>{{elementItems.title}}</span> -->
+                          <formBuilder :rule="elementItems" />
                           <div class="edit-son">
-                            <span @click="editItem(item)">编辑</span>
-                            <span @click="deleteItem(item)">删除</span>
+                            <span @click="editItemson(elementItems,items)">编辑</span>
+                            <span @click="deleteItemson(element,items)">删除</span>
                           </div>
                         </div>
                       </div>
@@ -71,7 +73,7 @@
                   </el-row>
                 </draggable>
                 <div class="edit-parent">
-                  <span @click="editItem(item)">编辑</span>
+                  <!-- <span @click="editItem(item)">编辑</span> -->
                   <span @click="deleteItem(item)">删除</span>
                 </div>
               </div>
@@ -107,16 +109,13 @@ export default {
       direction: "rtl",
       drawerItem: {}, // 用于识别编辑的项目
       list2: [
-        // 默认
-        { name: "标题", title: "标题", type: "title" },
-        {
-          name: "输入框",
-          type: "input",
-          field: "goods_name",
-          title: "名称:",
-          value: "mi"
-        },
-        { name: "按钮", title: "提交", type: "button" }
+        // {
+        //   name: "输入框",
+        //   type: "input",
+        //   field: "goods_name",
+        //   title: "名称:",
+        //   value: "mi"
+        // }
       ]
     };
   },
@@ -125,7 +124,10 @@ export default {
           id:this.$route.query.id
       }).then((response) => {
           if(response.data.state == true){
+            if(response.data.data.data != null){
               this.list2 = response.data.data.data
+
+            }
           }else{
             this.$message("获取表单信息失败")
           }
@@ -170,10 +172,51 @@ export default {
 
       console.log(this.list2);
     },
+    editItemson: function(value,item) {
+      console.log(value);
+      item
+      this.drawerItem = value;
+      this.drawer = true;
+      // item.title="标题2"
+      // this.list2[item].title = "sda"
+    },
+    deleteItemson: function(value,key) {
+      // 传下标
+      // this.dialogVisible = true
+      console.log(value.items[key]);
+      // let self = this;
+      this.$confirm("确认删除?").then(function() {
+        // console.log(result)
+        value.items.splice(key, 1);
+      });
+
+      // console.log(this.list2);
+    },
+    
     save:function(){
+      var colList = []
+      
+      let gradeList = JSON.parse(JSON.stringify(this.list2));
+      // console.log(gradeList)
+      for(let i = 0;i< gradeList.length; i++){
+        if(gradeList[i].items != null){
+          colList.push(i)
+          // console.log(gradeList[i].items)
+          for(let t = 0; t <gradeList[i].items.length;t++){
+            gradeList[i].items[t].field = this.randomCoding()
+            gradeList.push(gradeList[i].items[t])
+          }
+        }
+      }
+      colList.forEach(k=>{
+        // console.log(k)
+        gradeList.splice(k, 1);
+      })
+      // console.log(gradeList)
       this.axios.post(this.global.url + "/app/insertFormInfo",{
             id:this.$route.query.id,
-            formInfo:JSON.stringify(this.list2)
+            formInfo:JSON.stringify(this.list2),
+            formList:JSON.stringify(gradeList)
         }).then((response) => {
             // dom根据formList长度判断是否为空
             if(response.data.state != true){
@@ -197,6 +240,9 @@ export default {
           idvalue+=arr[Math.floor(Math.random()*36)];
       }
       return idvalue;
+    },
+    link:function(){
+      this.$router.push({path:"/designApp/newApplication/link",query: { id: this.$route.query.id}})
     }
   }
 };

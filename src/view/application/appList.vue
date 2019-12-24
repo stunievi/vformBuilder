@@ -12,9 +12,15 @@
       <el-main>
         <div>
           <div  v-for="(value,key) in appForm" :key="key">
-            <span>
-              {{value.name}}
-            </span>
+            <div class="form-list-item">
+              <div @click="enterAppView(value)">
+                <span>
+                {{value.name}}
+              </span>
+              </div>
+              
+            </div>
+            
           </div>
           
         </div>
@@ -48,9 +54,9 @@ export default {
       }).then((response) => {
           if(response.data.state == true){
               this.appList = response.data.data
-              console.log(this.appList)
+              // console.log(this.appList)
               // 获取第一个的表单
-                this.getAppFormList()
+                this.getAppFormList(this.appList[0])
                 loadingInstance1.close()
           }else{
             this.$message("获取表单信息失败")
@@ -62,11 +68,11 @@ export default {
     
     appListOpen:function(item){
       console.log(item)
-      this.getAppFormList()
+      this.getAppFormList(item)
     },
-    getAppFormList:function(){
+    getAppFormList:function(item){
       this.axios.post(this.global.url + "/app/getAppForm",{
-            id:this.appList[0].id
+            id:item.id
         }).then((response) => {
             if(response.data.state == true){
                 this.appForm = response.data.data
@@ -74,40 +80,29 @@ export default {
                 // 获取第一个的表单
                 
             }else{
-              this.$message("获取表单信息失败")
+              this.$message(response.data.message)
+              this.appForm = []
             }
             
         })
+    },
+    enterAppView:function(item){
+      this.$router.push({path:"/appView",query: { id: item.parentId,item:item.id}})
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.templates{
-  border:1px solid rgb(240,240,240);
-  height:100%;
-  .templates-item .edit{
-    display:none;
-    position: absolute;
-    right: 34px;
-    z-index: 1;
-    
-    // text-align: end;
-    span{
-      margin:0 5px;
-      padding:2px;
-      background:rgb(200,200,200);
-      color:#fff;
-      cursor: pointer;
-    }
-  }
-  .templates-item:hover{
-    border:1px solid rgb(200,200,200);
-    border-style: dashed;
-    .edit{
-      display: block;
-      text-align: end;
-    }
+.form-list-item{
+  width: 100px;
+  height: 100px;
+  border: 1px solid #5da6ff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  span{
+    color:#5da6ff
   }
 }
 </style>

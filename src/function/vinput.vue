@@ -2,14 +2,14 @@
   <div style="display:flex;align-items: center;">
     <div>
       <span class="small">
-        {{info.title}}
+        {{info.title}}:
       </span>
     </div>
     
     <div  style="flex-grow: 1;">
       <el-input
         placeholder="请填写信息"
-        v-model="inputValue"
+        v-model="info.value"
         size="small"
         >
       </el-input>

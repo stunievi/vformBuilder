@@ -6,7 +6,7 @@
       <el-scrollbar>
         <div style="height:100%;max-width:201px;overflow:auto">
           <el-menu  :router="true"  class="el-menu-vertical-demo" default-active="1-4-1" :default-openeds="['1', '3']" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-            <el-submenu index="1">
+            <!-- <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-message"></i>
                 <span slot="title">导航一</span>
@@ -23,7 +23,7 @@
                 <template slot="title">选项4</template>
                 <el-menu-item index="1-4-1">选项4-1</el-menu-item>
               </el-submenu>
-            </el-submenu>
+            </el-submenu> -->
             <el-submenu index="2">
               <template slot="title">
                 <i class="el-icon-menu"></i>
@@ -32,12 +32,14 @@
               <el-menu-item-group>
                 <!-- <template slot="title">分组一</template> -->
                 <el-menu-item index="/designApp">设计应用</el-menu-item>
+                <el-menu-item index="/designApp/design">设计应用新版</el-menu-item>
+                <el-menu-item index="/designApp/designFormData">新版表单数据</el-menu-item>
                 <el-menu-item index="/appList">应用列表</el-menu-item>
                 <el-menu-item index="/appList">我的应用</el-menu-item>
                 <el-menu-item index="/appList">回收站</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-            <el-submenu index="3">
+            <!-- <el-submenu index="3">
               <template slot="title">
                 <i class="el-icon-setting"></i>
                 <span slot="title">导航三</span>
@@ -54,7 +56,7 @@
                 <template slot="title">选项4</template>
                 <el-menu-item index="3-4-1">选项4-1</el-menu-item>
               </el-submenu>
-            </el-submenu>
+            </el-submenu> -->
           </el-menu>
         </div>
       </el-scrollbar>

@@ -2,6 +2,7 @@ import vinput from './vinput.vue'
 import vswitch from './vswitch.vue'
 import vtitle from './vtitle.vue'
 import vbutton from './vbutton.vue'
+import vselect from './vselect.vue'
 // import draggableItems from './draggableItems.vue'
 // vinput.install = function (Vue) {
 //     Vue.component('vshare', vinput)
@@ -51,6 +52,7 @@ export default {
                 case "button":
                     
                     elm = <vbutton info={this.rule}></vbutton>
+                    
                 break;
                 case "slider":
                     
@@ -62,7 +64,7 @@ export default {
                 break;
                 case "select":
                     
-                    elm = <span>{t} </span>
+                    elm = <vselect info={this.rule}></vselect>
                 break;
                 case "radio":
                     
@@ -88,10 +90,14 @@ export default {
                     
                     elm = <span>{t} </span>
                 break;
-                // case "layout":
+                case "layout":
                     
-                //     elm = <draggableItems info={this.rule}> </draggableItems>
-                // break;
+                    // elm = <draggableItems info={this.rule}> </draggableItems>
+                break;
+                case "col":
+                    
+                    elm = <span>{t} </span>
+                break;
             }
             // console.log(elm)
             return elm;
