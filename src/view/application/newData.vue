@@ -81,8 +81,9 @@ export default {
           id:this.$route.query.id
       }).then((response) => {
           if(response.data.state == true){
-              this.list = response.data.data.data
-              console.log(this.list)
+              console.log("this.list",response.data.data)
+              this.list = response.data.data.formData
+
           }else{
             this.$message("获取表单信息失败")
           }
@@ -100,10 +101,11 @@ export default {
         var result = {};
         this.list.forEach(v=>{
             // let field = v.field
+            console.log("vvvvvvvvvvvvvvvvvv",v)
             let value = v.value
             result[v.field] = value
         })
-            // console.log(result)
+            console.log(result)
 
     //     return null;
         this.axios.post(this.global.url + "/app/insertFormDataById",{

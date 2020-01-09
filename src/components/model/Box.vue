@@ -11,6 +11,8 @@
                         <MSelect v-if="v.type == 'select'" :data="v" ref="widgets"/>
                         <MDate v-if="v.type == 'date'" :data="v" ref="widgets"/>
                         <MLabel v-if="v.type == 'label'" :data="v" ref="widgets"/>
+                        <MTextArea v-if="v.type == 'textarea'" :data="v" ref="widgets"/>
+                        <MButton v-if="v.type == 'button'" :data="v" ref="widgets"/>
                     </template>
                     <template v-else>
                         <MButton :data="v" />
@@ -22,6 +24,7 @@
 </template>
 <script>
     import MText from "./MText"
+    import MTextArea from "./MTextArea"
     import MSelect from "./MSelect"
     import MDate from "./MDate"
     import MLabel from "./MLabel"
@@ -32,7 +35,8 @@
             MSelect,
             MDate,
             MLabel,
-            MButton
+            MButton,
+            MTextArea
         },
         props:["data"],
         data(){

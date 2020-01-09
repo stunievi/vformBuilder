@@ -1,7 +1,7 @@
 <template>
     <div>
         <span  class="small">{{info.title}}:</span>
-        <el-select v-model="value" placeholder="请选择">
+        <el-select v-model="value"  placeholder="请选择" @change="change">
             <el-option
             v-for="item in options"
             :key="item.value"
@@ -15,15 +15,26 @@
 
 <script>
   export default {
-    name : 'vinput',
+    name : 'vselect',
     props: {
         info: Object
     },
     data() {
       return {
         options:this.info.options,
-        value: ''
+        value: this.info.value || ''
       }
+    },
+    methods:{
+      change:function(val){
+          var obj = {}
+          obj = this.options.find(item =>{
+          return item.value === val 
+        });
+       console.log(obj)
+       console.log(this.value)
+      //  this.editMessage.chname = obj.chname
+     }
     }
   }
 </script>

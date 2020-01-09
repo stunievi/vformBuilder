@@ -106,7 +106,7 @@ export default {
     },
     render () {
         return (
-            <div style={this.component}>
+            <div style={this.component} >
                 {
                     this.builderTemplate(this.rule.type)
                 }

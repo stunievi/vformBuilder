@@ -11,6 +11,7 @@
         },
         created() {
             this.data = this.data||{};
+            this.value = this.data.value || ""
         }
     }
 

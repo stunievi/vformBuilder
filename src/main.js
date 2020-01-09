@@ -11,11 +11,15 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 import config from "@/config/config"
- 
+// import uploadCustom from '@/components/Upload/upload.vue';
+
+
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.use(formCreate);
 Vue.use(ElementUI);
+// Vue.component(uploadCustom.name, uploadCustom);
+
 Vue.config.productionTip = false
 
 // 挂载全局

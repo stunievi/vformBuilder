@@ -32,8 +32,12 @@
               <el-menu-item-group>
                 <!-- <template slot="title">分组一</template> -->
                 <el-menu-item index="/designApp">设计应用</el-menu-item>
+
+                <el-menu-item index="/newDraData">集成新工具</el-menu-item>
+                
                 <el-menu-item index="/designApp/design">设计应用新版</el-menu-item>
                 <el-menu-item index="/designApp/designFormData">新版表单数据</el-menu-item>
+                <el-menu-item index="/designApp/officeFenlei">办公用品分类设置</el-menu-item>
                 <el-menu-item index="/appList">应用列表</el-menu-item>
                 <el-menu-item index="/appList">我的应用</el-menu-item>
                 <el-menu-item index="/appList">回收站</el-menu-item>

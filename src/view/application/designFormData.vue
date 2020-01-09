@@ -156,7 +156,7 @@ export default {
         this.$router.push({path:"/designApp/design"})
     },
     newData:function(){
-        this.$router.push({path:"/appView/newData",query:{id:this.$route.query.item}})
+        this.$router.push({path:"/appView/newData",query:{id:"5def9d521d001b27c55b18b4"}})
     },
     log:function(){
         console.log(this.list)
