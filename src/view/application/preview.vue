@@ -60,18 +60,22 @@
                                 message: "保存成功",
                                 type: "success"
                             });
+                            this.back();
                         }
                         // console.log(this.formList)
                     });
-
-                console.log('submit', model)
+            },
+            back(){
+                this.$router.go(-1);//返回上一层
             }
         },
         created() {
             const id = this.$route.query.id
             if (id) {
                 this.axios.post(this.global.url + "/app/getAppFormInfo", {
-                    id: this.$route.query.id
+                    id: this.$route.query.id,
+                    pId: this.$route.query.pId,
+                    type: this.type
                 }).then(res => {
                     if (res.data.state == true) {
                         console.log("res.data.data", res.data.data)

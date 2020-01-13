@@ -34,9 +34,6 @@
                                 新建
                                 <i class="el-icon-upload el-icon--right"></i>
                             </el-button>
-                            <div v-for="(li,item) in list" :key="item">
-                                <formBuilder :rule="li"/>
-                            </div>
 
                             <el-table
                                     :data="tableData"
@@ -46,10 +43,9 @@
                                         v-for="(value,key) in list"
                                         :key="key"
                                         :prop="value.name"
-                                        :label="value.name"
-                                        width="180">
+                                        :label="value.name">
                                 </el-table-column>
-                                <el-table-column label="操作" width="100">
+                                <el-table-column label="操作" width="100" v-show="formList.length">
                                     <template slot-scope="scope">
                                         <el-button @click="handleClick(scope.row)" type="text" size="small">编辑
                                         </el-button>
@@ -57,8 +53,7 @@
                                                 @click.native.prevent="deleteRow(scope.$index, tableData,scope.row)"
                                                 type="text"
                                                 size="small"
-                                        >移除
-                                        </el-button>
+                                        >移除</el-button>
                                     </template>
                                 </el-table-column>
                             </el-table>
@@ -140,7 +135,6 @@
                     })
                     .then(response => {
                         if (response.data.state == true) {
-                            console.log("response.data.data.formDataList", response.data.data.formDataList)
                             this.list = response.data.data.formDataList
                             this.getFormData();
                         } else {
@@ -191,10 +185,11 @@
                 // });
             },
             handleClick(row) {
-                this.$router.push({
-                    path: "/appView/testData",
-                    query: {id: row.id, type: "edit"}
-                });
+                this.$router.push({path: "/preview", query: {id: row.id, pId: this.$route.query.item, type: "edit"}})
+                // this.$router.push({
+                //     path: "/appView/testData",
+                //     query: {id: row.id, type: "edit"}
+                // });
             },
             deleteRow(index, rows, obj) {
                 rows.splice(index, 1);
