@@ -1,5 +1,5 @@
 <template>
-    <div style="    height: 100%;">
+    <div style="height: 100%;">
 
         <el-main>
             <el-scrollbar style="height:100%">
@@ -65,6 +65,7 @@
     export default {
         data() {
             return {
+                activeIndex2: '1',
                 rules: {
                     name: [
                         {required: true, message: '请填写名称', trigger: 'blur'}
@@ -103,6 +104,9 @@
             // this.getFormInfo();
         },
         methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
             sure: function () {
                 this.dialogVisible = false;
                 console.log(this.global);
@@ -198,7 +202,6 @@
                             this.tableData = []
                             response.data.data.forEach(e => {
                                 e.model.id = e.id
-                                console.log('eeeee', e.model)
                                 this.tableData.push(e.model)
                             })
                         } else {
@@ -243,48 +246,10 @@
                         }
                     });
             },
-            getFormInfo: function () {
-                this.axios
-                    .post(this.global.url + "/app/getAppFormInfo", {
-                        id: "5e042f21b72b5056ca27e842"
-                    })
-                    .then(response => {
-                        if (response.data.state == true) {
-                            console.log(response.data.data)
-                            this.list = response.data.data.formData
-                            this.getFormData();
-                        } else {
-                            this.$message(response.data.message);
-                        }
-
-                    });
-            },
-            getFormData: function () {
-                this.axios
-                    .post(this.global.url + "/app/getFormData", {
-                        id: "5e042ecfb72b5056ca27e841"
-                    })
-                    .then(response => {
-                        if (response.data.state == true) {
-                            let data = response.data.data;
-                            let FormDataList = new Array();
-                            data.forEach(element => {
-                                element.formData.id = element.id;
-                                FormDataList.push(element.formData);
-                            });
-                            this.tableData = FormDataList;
-                        } else {
-                            this.$message(response.data.message);
-                        }
-                    });
-            },
             enterForm: function (list) {
                 console.log(list);
                 // this.item = list
                 // this.$router.push({path:"/designApp/newApplication",query:{id:list.id}})
-            },
-            enterNewForm: function () {
-                this.$router.push({path: "/designApp/design"});
             },
             newData: function () {
                 this.dialogVisible = true
